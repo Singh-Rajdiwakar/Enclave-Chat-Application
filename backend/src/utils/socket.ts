@@ -101,16 +101,21 @@ export const initializeSocket = (httpServer: HttpServer) => {
     const userId = socket.data.userId;
     console.log(`[Socket] 🟢 User connected: ${userId} (socketId: ${socket.id})`);
 
-    // send list of currently online users to the newly connected client
-    socket.emit("online-users", { userIds: Array.from(onlineUsers.keys()) });
-
-    // store user in the onlineUsers map
+    // store user in the onlineUsers map FIRST
     onlineUsers.set(userId, socket.id);
+
+    // send list of currently online users to the newly connected client (including self)
+    socket.emit("online-users", { userIds: Array.from(onlineUsers.keys()) });
 
     // notify others that this current user is online
     socket.broadcast.emit("user-online", { userId });
 
     socket.join(`user:${userId}`);
+
+    // Allow client to re-request online users list (e.g. after reconnect)
+    socket.on("get-online-users", () => {
+      socket.emit("online-users", { userIds: Array.from(onlineUsers.keys()) });
+    });
 
     socket.on("join-chat", async (chatId: string) => {
       console.log(`[Socket] User ${userId} joined room chat:${chatId}`);

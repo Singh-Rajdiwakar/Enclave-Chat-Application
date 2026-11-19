@@ -46,6 +46,8 @@ export const useSocketStore = create((set, get) => ({
 
     socket.on("connect", () => {
       console.log("🟢 Socket connected:", socket.id);
+      // On reconnect, re-request the current online users list
+      socket.emit("get-online-users");
     });
 
     socket.on("connect_error", async (error) => {
