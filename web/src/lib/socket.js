@@ -1,13 +1,19 @@
 import { create } from "zustand";
 import { io } from "socket.io-client";
 
-const defaultSocketUrl = import.meta.env.DEV
-  ? "http://localhost:3000"
-  : typeof window !== "undefined"
-  ? window.location.origin
-  : "";
+const getSocketURL = () => {
+  if (typeof window !== "undefined") {
+    const isLocalhost =
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1";
+    if (!isLocalhost) {
+      return window.location.origin;
+    }
+  }
+  return (import.meta.env.VITE_API_URL || "http://localhost:3000").replace(/\/api\/?$/, "");
+};
 
-const SOCKET_URL = (import.meta.env.VITE_API_URL || defaultSocketUrl).replace(/\/api\/?$/, "");
+const SOCKET_URL = getSocketURL();
 
 export const useSocketStore = create((set, get) => ({
   socket: null,
