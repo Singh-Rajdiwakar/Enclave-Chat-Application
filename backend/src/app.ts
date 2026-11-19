@@ -1,5 +1,6 @@
 import express from "express";
 import path from "path";
+import fs from "fs";
 import cors from "cors";
 
 import { clerkMiddleware } from "@clerk/express";
@@ -53,16 +54,27 @@ app.use("/api/users", userRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/tasks", taskRoutes);
 
-// error handlers must come after all the routes and other middlewares so they can catch errors passed with next(err) or thrown inside async handlers.
-app.use(errorHandler);
+// serve frontend
+const potentialDistPaths = [
+  path.resolve(process.cwd(), "../web/dist"),
+  path.resolve(__dirname, "../../web/dist"),
+  path.resolve("/app/web/dist"),
+];
+const distPath = potentialDistPaths.find((p) => fs.existsSync(p));
 
-// serve frontend in production
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../../web/dist")));
+if (distPath) {
+  console.log("Serving frontend from:", distPath);
+  app.use(express.static(distPath));
 
-  app.get("/{*any}", (_, res) => {
-    res.sendFile(path.join(__dirname, "../../web/dist/index.html"));
+  app.get("/{*any}", (req, res, next) => {
+    if (req.path.startsWith("/api") || req.path.startsWith("/uploads") || req.path.startsWith("/health")) {
+      return next();
+    }
+    res.sendFile(path.join(distPath, "index.html"));
   });
 }
+
+// error handlers must come after all the routes and other middlewares so they can catch errors passed with next(err) or thrown inside async handlers.
+app.use(errorHandler);
 
 export default app;
