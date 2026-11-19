@@ -1,0 +1,146 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+:root {
+  --bg: #0A0B10;
+  --surface: #11131A;
+  --surface-raised: #161922;
+  --surface-hover: rgba(255, 255, 255, 0.04);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-subtle: rgba(255, 255, 255, 0.04);
+  --text: #E6E8EF;
+  --muted: #8B90A0;
+  --accent: #7C83FF;
+  --accent-2: #A78BFA;
+  --accent-glow: rgba(124, 131, 255, 0.35);
+}
+
+/* 4 Tech Themes */
+[data-tech-theme="indigo"], :root:not([data-tech-theme]) {
+  --accent: #7C83FF;
+  --accent-2: #A78BFA;
+  --accent-glow: rgba(124, 131, 255, 0.35);
+}
+
+[data-tech-theme="cyan"] {
+  --accent: #22D3EE;
+  --accent-2: #06B6D4;
+  --accent-glow: rgba(34, 211, 238, 0.35);
+}
+
+[data-tech-theme="emerald"] {
+  --accent: #34D399;
+  --accent-2: #10B981;
+  --accent-glow: rgba(52, 211, 153, 0.35);
+}
+
+[data-tech-theme="amber"] {
+  --accent: #F59E0B;
+  --accent-2: #D97706;
+  --accent-glow: rgba(245, 158, 11, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background:
+    radial-gradient(700px circle at 85% -10%, rgba(124, 131, 255, 0.09), transparent 60%),
+    radial-gradient(600px circle at 15% 105%, rgba(167, 139, 250, 0.05), transparent 50%),
+    var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Subtle tech grid texture */
+.tech-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Meri message (User's message bubble) */
+.msg-me {
+  background: linear-gradient(var(--surface), var(--surface)) padding-box,
+              linear-gradient(135deg, var(--accent), var(--accent-2)) border-box;
+  border: 1px solid transparent;
+  box-shadow: 0 0 24px -8px var(--accent-glow);
+  border-radius: 14px;
+  color: var(--text);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.msg-me:hover {
+  box-shadow: 0 0 28px -4px var(--accent-glow);
+}
+
+/* Samne wale message (Other participant) */
+.msg-them {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  border-radius: 14px;
+  color: var(--text);
+  transition: border-color 150ms ease, background 150ms ease;
+}
+
+.msg-them:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Metadata typography */
+.meta, .meta-mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* Accent send button */
+.send-btn {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 0 20px -4px var(--accent);
+  color: #ffffff;
+  border: none;
+}
+
+.send-btn:hover {
+  box-shadow: 0 0 25px -2px var(--accent);
+  filter: brightness(1.06);
+}
+
+/* Message appearance animation: 150ms fade+slide */
+@keyframes msgAppear {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.msg-animate {
+  animation: msgAppear 150ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.16);
+}

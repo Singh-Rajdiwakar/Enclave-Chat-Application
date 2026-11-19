@@ -1,0 +1,30 @@
+{
+  "name": "enclave-backend",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "tsx watch index.ts",
+    "start": "tsx index.ts",
+    "seed": "tsx src/scripts/seed.ts",
+    "build": "echo 'Backend ready'"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/multer": "^2.3.0",
+    "dotenv": "^18.0.10",
+    "tsx": "^4.23.15"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@clerk/express": "1.7.60",
+    "@types/express": "^5.0.6",
+    "cors": "2.8.5",
+    "express": "5.2.1",
+    "mongoose": "9.0.2",
+    "multer": "^2.5.0",
+    "socket.io": "4.8.2"
+  }
+}
