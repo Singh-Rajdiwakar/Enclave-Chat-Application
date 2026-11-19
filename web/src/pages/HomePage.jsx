@@ -50,9 +50,11 @@ export default function HomePage() {
       {/* 🚀 NAVBAR */}
       <nav className="relative z-20 mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-linear-to-br from-indigo-500 via-violet-500 to-fuchsia-500 flex items-center justify-center shadow-[0_0_20px_-4px_rgba(124,131,255,0.7)]">
-            <SparklesIcon className="w-4 h-4 text-white" />
-          </div>
+          <img
+            src="/enclave-icon.svg"
+            alt="Enclave"
+            className="w-8 h-8 rounded-lg shadow-[0_0_20px_-4px_rgba(52,211,153,0.5)] object-contain"
+          />
           <span className="text-lg font-semibold tracking-tight text-white">Enclave</span>
         </div>
 
@@ -613,7 +615,8 @@ export default function HomePage() {
       <footer className="relative z-10 border-t border-white/[0.06] py-8 px-6 text-xs text-white/40 font-mono">
         <div className="max-w-6xl mx-auto flex flex-col items-center justify-center gap-2.5 text-center">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400" />
+            <img src="/enclave-icon.svg" alt="Enclave" className="w-4 h-4 object-contain opacity-80" />
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
             <span>All systems live & operational</span>
           </div>
           <p>© 2026 Enclave • High-performance real-time messaging</p>

@@ -366,14 +366,11 @@ function ChatPage() {
         <div className="p-4 border-b border-white/[0.08]">
           <div className="flex items-center justify-between mb-3.5">
             <Link to="/chat" className="flex items-center gap-2 group">
-              <div
-                className="w-8 h-8 rounded-lg flex items-center justify-center shadow-xs transition duration-150 group-hover:scale-105"
-                style={{
-                  background: "linear-gradient(135deg, var(--accent), var(--accent-2))",
-                }}
-              >
-                <SparklesIcon className="w-4 h-4 text-white" />
-              </div>
+              <img
+                src="/enclave-icon.svg"
+                alt="Enclave"
+                className="w-8 h-8 rounded-lg shadow-xs transition duration-150 group-hover:scale-105 object-contain"
+              />
               <span className="font-semibold text-base tracking-tight text-[var(--text)]">Enclave</span>
             </Link>
 
@@ -697,13 +694,8 @@ function NoMessagesUI() {
 function NoChatSelectedUI() {
   return (
     <div className="flex-1 flex flex-col items-center justify-center text-center px-8 z-10">
-      <div
-        className="w-16 h-16 rounded-2xl flex items-center justify-center mb-5 border border-white/[0.08]"
-        style={{
-          background: "linear-gradient(135deg, rgba(124,131,255,0.1), rgba(167,139,250,0.05))",
-        }}
-      >
-        <SparklesIcon className="w-7 h-7 text-[var(--accent)]" />
+      <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-5 border border-white/[0.08] p-3 bg-white/[0.02] shadow-lg">
+        <img src="/enclave-icon.svg" alt="Enclave" className="w-full h-full object-contain" />
       </div>
       <h2 className="text-xl font-semibold mb-1 text-[var(--text)]">Welcome to Enclave</h2>
       <p className="text-sm text-[var(--muted)] max-w-sm leading-relaxed">
