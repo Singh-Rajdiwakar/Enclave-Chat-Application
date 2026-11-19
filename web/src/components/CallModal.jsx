@@ -103,6 +103,7 @@ export function CallModal() {
   if (callStatus !== "calling" && callStatus !== "connected") return null;
 
   const isConnected = callStatus === "connected";
+  // A call is a group call only if there are actual extra peers (not just the receiver)
   const isGroupCall = peers.length > 0;
 
   return (

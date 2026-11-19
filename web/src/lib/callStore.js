@@ -516,7 +516,8 @@ export const useCallStore = create((set, get) => ({
         callRoomId: get().callRoomId,
       });
 
-      if (get().callRoomId) {
+      // Only join group call room if this was explicitly a group call invite
+      if (get().callRoomId && get().isGroup) {
         socket.emit("join-group-call", { callRoomId: get().callRoomId });
       }
 
